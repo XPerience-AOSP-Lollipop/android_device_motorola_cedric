@@ -23,7 +23,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, vendor/motorola/cedric/cedric-vendor.mk)
 
 # Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+$(call inherit-product, vendor/XPe/config/common_full_phone.mk)
 
 # Boot animation
 TARGET_SCREEN_WIDTH := 1080
@@ -31,6 +31,10 @@ TARGET_SCREEN_HEIGHT := 1920
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := cedric
-PRODUCT_NAME := lineage_cedric
+PRODUCT_NAME := xpe_cedric
 PRODUCT_BRAND := motorola
 PRODUCT_MANUFACTURER := motorola
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRODUCT_NAME="Moto G5" \
+    PRODUCT_MODEL"XT1671"

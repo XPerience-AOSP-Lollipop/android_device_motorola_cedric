@@ -143,10 +143,6 @@ PRODUCT_PACKAGES += \
     memtrack.msm8937 \
     libtinyxml
 
-# Display Calibration
-# PRODUCT_PACKAGES += \
-#    libjni_livedisplay
-
 # DRM
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-lite
