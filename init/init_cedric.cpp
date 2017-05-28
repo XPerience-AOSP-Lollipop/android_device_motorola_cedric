@@ -77,6 +77,21 @@ void vendor_load_properties()
         gb[0] = 0;
     }
 
+   //dual sim 
+   std::string msim = property_get("ro.boot.dualsim");
+   property_set("ro.hw.dualsim", msim.c_str());
+
+    if (property_get("ro.telephony.default_network").empty()) {
+        property_set("ro.telephony.default_network", "9");
+    }
+
+    if (msim == "true")
+    {
+        property_set("persist.radio.multisim.config", "dsds");
+        property_set("ro.telephony.ril.config", "simactivation");
+        sprintf(ds, "_ds");
+    }
+
    //rmt storage
     property_set("ro.hw.device", device.c_str());
     property_set("ro.hw.radio", radio.c_str());
