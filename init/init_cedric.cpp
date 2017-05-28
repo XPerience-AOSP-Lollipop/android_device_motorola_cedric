@@ -36,18 +36,19 @@
 #include "util.h"
 #include <sys/sysinfo.h>
 
-//Take care about 2gb ram
-int is2GB()
+//Take care about 3gb ram
+int is3GB()
 {
     struct sysinfo sys;
     sysinfo(&sys);
-    return sys.totalram > 1024ull * 1024 * 1024;
+    return sys.totalram > 2048ull * 1024 * 1024;
 }
 
 void vendor_load_properties()
 {
 
     char gb[PROP_VALUE_MAX];
+    char ds[PROP_VALUE_MAX];
 
     std::string platform = property_get("ro.board.platform");
     if (platform != ANDROID_TARGET)
@@ -59,14 +60,14 @@ void vendor_load_properties()
     property_set("ro.product.model", sku.c_str());
 
 
-    if (is2GB()) {
+    if (is3GB()) {
         property_set("dalvik.vm.heapstartsize", "8m");
         property_set("dalvik.vm.heapgrowthlimit", "192m");
         property_set("dalvik.vm.heapsize", "512m");
         property_set("dalvik.vm.heaptargetutilization", "0.75");
         property_set("dalvik.vm.heapminfree", "512k");
         property_set("dalvik.vm.heapmaxfree", "8m");
-        sprintf(gb, "_2gb");
+        sprintf(gb, "_3gb");
     } else {
         property_set("dalvik.vm.heapstartsize", "8m");
         property_set("dalvik.vm.heapgrowthlimit", "96m");
@@ -77,7 +78,7 @@ void vendor_load_properties()
         gb[0] = 0;
     }
 
-   //dual sim 
+   //dual sim
    std::string msim = property_get("ro.boot.dualsim");
    property_set("ro.hw.dualsim", msim.c_str());
 
